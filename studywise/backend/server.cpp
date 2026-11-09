@@ -130,6 +130,9 @@ std::string httpResponse(int status, const std::string& statusText,
                          const std::string& body) {
     std::ostringstream response;
     response << "HTTP/1.1 " << status << " " << statusText << "\r\n"
+            << "Access-Control-Allow-Origin: *\r\n"
+            << "Access-Control-Allow-Methods: GET, POST, OPTIONS\r\n"
+            << "Access-Control-Allow-Headers: Content-Type\r\n"
              << "Content-Type: " << contentType << "\r\n"
              << "Content-Length: " << body.size() << "\r\n"
              << "Connection: close\r\n"
@@ -189,7 +192,11 @@ void handleClient(int client) {
     }
     std::string body = request.substr(bodyStart, contentLength);
 
-    if (method == "GET" && (path == "/" || path == "/index.html")) {
+    if (method == "OPTIONS") {
+    sendAll(client, httpResponse(
+        204, "No Content", "text/plain", ""
+    ));
+    } else if (method == "GET" && (path == "/" || path == "/index.html")) {
         std::ifstream file("index.html", std::ios::binary);
         if (!file) {
             sendAll(client, httpResponse(500, "Internal Server Error", "text/plain",
