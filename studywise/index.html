@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StudyWise — Learn independently</title>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7ebf2;--blue:#4263eb;--blue2:#edf1ff;--green:#16845b;--amber:#a86408;--red:#c0394b;--shadow:0 8px 28px rgba(22,34,66,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 15px;background:var(--blue);color:white;font-weight:650}button.secondary{background:#eef1f7;color:#344054}button.ghost{background:transparent;color:var(--muted);padding:8px}
+.shell{display:flex;min-height:100vh}.sidebar{width:245px;background:#111a2e;color:#e8edfa;padding:26px 18px;display:flex;flex-direction:column;gap:28px}.brand{display:flex;align-items:center;gap:11px;font-size:20px;font-weight:800;letter-spacing:-.5px}.logo{width:35px;height:35px;border-radius:11px;background:#6f85ff;display:grid;place-items:center;color:white;font-weight:900}.nav{display:grid;gap:7px}.nav button{background:transparent;color:#aeb9d0;text-align:left;font-weight:550;padding:12px;border-radius:9px}.nav button.active,.nav button:hover{background:#25314c;color:white}.side-note{margin-top:auto;color:#aeb9d0;font-size:12px;line-height:1.6;padding:12px;background:#1b2740;border-radius:12px}
+main{flex:1;min-width:0;padding:30px clamp(18px,4vw,54px) 55px;max-width:1500px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:28px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:1.1px;color:var(--blue);font-weight:800}.top h1{font-size:29px;letter-spacing:-.8px;margin:3px 0}.muted{color:var(--muted)}.avatar{height:40px;width:40px;border-radius:50%;background:#e7ebff;color:#344dc5;display:grid;place-items:center;font-weight:800}
+.view{display:none}.view.active{display:block}.grid{display:grid;gap:17px}.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin:20px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.stat-label{font-size:13px;color:var(--muted)}.stat-value{font-size:27px;font-weight:800;letter-spacing:-.7px;margin:6px 0}.stat-foot{font-size:12px;color:var(--muted)}.two{grid-template-columns:1.25fr .75fr}.section-title{font-size:17px;font-weight:750;margin:0 0 15px}.barrow{display:grid;grid-template-columns:125px 1fr 35px;gap:10px;align-items:center;margin:13px 0;font-size:13px}.track{height:9px;background:#edf0f6;border-radius:20px;overflow:hidden}.fill{height:100%;background:var(--blue);border-radius:20px}.pill{display:inline-flex;padding:5px 10px;border-radius:99px;font-size:12px;font-weight:750}.pill.green{background:#e7f7ef;color:var(--green)}.pill.amber{background:#fff3df;color:var(--amber)}.pill.red{background:#ffebee;color:var(--red)}.pill.blue{background:var(--blue2);color:#3b55d9}
+.activity{display:flex;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);align-items:center}.activity:last-child{border:0}.activity strong{display:block;font-size:14px}.activity small{color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px}.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:700}.field input{width:100%;border:1px solid #d9dfeb;border-radius:10px;padding:12px;background:white;color:var(--ink)}.field input:focus{outline:3px solid #e5eaff;border-color:#8094ff}.help{font-size:12px;color:var(--muted)}.form-actions{display:flex;gap:10px;margin-top:20px;align-items:center}.error{color:var(--red);font-size:13px;margin-top:12px}.result{margin-top:20px;padding:18px;border-radius:13px;background:#f7f8fc;border:1px solid var(--line);display:none}.result.show{display:block}.result h3{margin:8px 0}.recommend{padding:10px 0;border-bottom:1px solid var(--line)}.recommend:last-child{border:0}.history-table{width:100%;border-collapse:collapse;font-size:13px}.history-table th,.history-table td{text-align:left;padding:12px 9px;border-bottom:1px solid var(--line)}.history-table th{color:var(--muted);font-weight:650}.empty{padding:28px;text-align:center;color:var(--muted)}.plan-list{display:grid;gap:12px}.plan-item{display:flex;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px}.plan-item input{accent-color:var(--blue);width:17px;height:17px;margin-top:3px}.plan-item.done{opacity:.55;text-decoration:line-through}.chatbox{display:flex;gap:9px;margin-top:14px}.chatbox input{flex:1;border:1px solid #d9dfeb;border-radius:10px;padding:12px}.notice{background:#fff8e9;border:1px solid #f4e2b9;color:#77500e;padding:13px 15px;border-radius:12px;font-size:13px;margin-bottom:17px}
+@media(max-width:900px){.sidebar{width:205px}.stats{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:650px){.shell{display:block}.sidebar{width:auto;padding:15px;gap:13px}.brand{font-size:18px}.nav{display:flex;overflow:auto}.nav button{white-space:nowrap;padding:9px}.side-note{display:none}main{padding:22px 15px}.top h1{font-size:24px}.form-grid{grid-template-columns:1fr}.stats{gap:10px}.card{padding:16px}.history-table{font-size:11px}.history-table th,.history-table td{padding:9px 5px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">S</div> StudyWise</div>
+  <nav class="nav">
+    <button class="active" data-view="dashboard">▦ &nbsp; Dashboard</button>
+    <button data-view="assessment">＋ &nbsp; New assessment</button>
+    <button data-view="history">◷ &nbsp; My progress</button>
+    <button data-view="plan">✓ &nbsp; Study plan</button>
+    <button data-view="assistant">✦ &nbsp; Learning assistant</button>
+  </nav>
+  <div class="side-note"><strong>Our goal</strong><br>Use AI as a learning partner—not a replacement for your own thinking.</div>
+</aside>
+<main>
+  <header class="top">
+    <div><div class="eyebrow">Your learning workspace</div><h1 id="pageTitle">Dashboard</h1><div class="muted" id="pageSub">Build stronger independent-learning habits, one session at a time.</div></div>
+    <div class="avatar">S</div>
+  </header>
+
+  <section class="view active" id="dashboard">
+    <div class="notice">StudyWise provides reflective learning guidance, not a clinical or validated measure of AI dependency. Your activity is stored locally in this browser demo.</div>
+    <div class="grid stats">
+      <div class="card"><div class="stat-label">Assessments completed</div><div class="stat-value" id="statCount">0</div><div class="stat-foot">Your recorded sessions</div></div>
+      <div class="card"><div class="stat-label">Independent attempts</div><div class="stat-value" id="statAttempts">—</div><div class="stat-foot">Across recorded sessions</div></div>
+      <div class="card"><div class="stat-label">AI use</div><div class="stat-value" id="statAI">—</div><div class="stat-foot">AI uses per problem</div></div>
+      <div class="card"><div class="stat-label">Latest result</div><div class="stat-value" id="statResult" style="font-size:20px">Not assessed</div><div class="stat-foot">Based on your latest session</div></div>
+    </div>
+    <div class="grid two">
+      <div class="card"><h2 class="section-title">Your latest learning snapshot</h2><div id="snapshot"><div class="empty">Complete your first assessment to see your learning snapshot.</div></div></div>
+      <div class="card"><h2 class="section-title">A small habit to try</h2><div style="font-size:16px;font-weight:700;margin-bottom:8px">Pause before prompting</div><p class="muted">Spend five minutes trying a problem yourself. If you get stuck, ask AI for a hint or explanation instead of a complete answer.</p><button class="secondary" onclick="showView('assessment')">Record a study session</button></div>
+    </div>
+  </section>
+
+  <section class="view" id="assessment">
+    <div class="card">
+      <h2 class="section-title">Record a study session</h2>
+      <p class="muted">Enter what happened during one assignment or study session. Use honest estimates; the goal is reflection, not judgment.</p><div class="help" style="margin-bottom:16px">Assessment requests are processed by the C++ backend and classified by the Racket functional component.</div>
+      <form id="assessmentForm">
+        <div class="form-grid">
+          <div class="field"><label for="total">Total problems assigned</label><input id="total" type="number" min="1" max="500" value="10" required><span class="help">A positive whole number.</span></div>
+          <div class="field"><label for="attempted">Problems attempted independently</label><input id="attempted" type="number" min="0" max="500" value="5" required><span class="help">How many you tried before asking AI.</span></div>
+          <div class="field"><label for="aiUses">Times you used AI for help</label><input id="aiUses" type="number" min="0" max="500" value="2" required><span class="help">Count separate prompts or help requests.</span></div>
+          <div class="field"><label for="subject">Subject (optional)</label><input id="subject" type="text" maxlength="60" placeholder="e.g. Computer Science"></div>
+        </div>
+        <div class="form-actions"><button type="submit">Evaluate my session</button><button class="secondary" type="reset">Reset</button></div>
+        <div class="error" id="formError" role="alert"></div>
+      </form>
+      <div class="result" id="assessmentResult" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="view" id="history">
+    <div class="card"><h2 class="section-title">Assessment history</h2><div id="historyContent"><div class="empty">No assessments yet.</div></div></div>
+  </section>
+
+  <section class="view" id="plan">
+    <div class="grid two">
+      <div class="card"><h2 class="section-title">Your independent-learning plan</h2><p class="muted">A simple plan to help you build confidence without relying on AI for every step.</p><div class="plan-list" id="planList"></div></div>
+      <div class="card"><h2 class="section-title">Plan builder</h2><div class="field"><label for="goal">What would you like to improve?</label><input id="goal" value="Solve more problems independently" maxlength="100"></div><div class="field" style="margin-top:14px"><label for="days">Plan length (days)</label><input id="days" type="number" min="1" max="30" value="7"></div><button style="margin-top:17px" onclick="buildPlan()">Create my plan</button><p class="help" style="margin-top:10px">This demo uses a predefined plan template. The full project can connect this feature to the Racket Study Plan DSL.</p></div>
+    </div>
+  </section>
+
+  <section class="view" id="assistant">
+    <div class="grid two">
+      <div class="card"><h2 class="section-title">Personalized learning assistant</h2><p class="muted">Ask for practical ways to use AI as a tutor while keeping yourself responsible for the thinking.</p><div id="chatMessages"><div class="recommend">Hi! I can suggest study strategies based on your latest assessment. Try asking: “How can I use AI without copying answers?”</div></div><form id="chatForm" class="chatbox"><input id="chatInput" placeholder="Ask a study question…" maxlength="300"><button>Send</button></form><p class="help" style="margin-top:10px">Demo mode: responses use local guidance rules. Connect an LLM API on the backend for genuine AI-generated feedback.</p></div>
+      <div class="card"><h2 class="section-title">Responsible AI checklist</h2><div class="recommend">Try the problem yourself before prompting.</div><div class="recommend">Ask for a hint, explanation, or a worked example—not just the final answer.</div><div class="recommend">Close the AI tool and explain the solution in your own words.</div><div class="recommend">Verify important information using course materials or trusted sources.</div></div>
+    </div>
+  </section>
+</main>
+</div>
+<script>
+const KEY='studywise-assessments-v1';
+const titles={dashboard:['Dashboard','Build stronger independent-learning habits, one session at a time.'],assessment:['New assessment','Reflect on how you approached your recent study session.'],history:['My progress','Review your recorded sessions and learning patterns.'],plan:['Study plan','Turn your learning goals into small, practical actions.'],assistant:['Learning assistant','Get practical guidance for responsible AI use.']};
+let assessments=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(){localStorage.setItem(KEY,JSON.stringify(assessments))}
+function showView(name){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===name));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===name));document.getElementById('pageTitle').textContent=titles[name][0];document.getElementById('pageSub').textContent=titles[name][1];if(name==='dashboard')renderDashboard();if(name==='history')renderHistory()}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
+function classify(a,ai,total){if(total<=0||a<0||a>total||ai<0)return 'Invalid input';if(a*2<total&&ai*2>=total)return 'Overdependent';if(ai===0)return 'Independent';return 'Balanced'}
+function advice(label){return label==='Overdependent'?'Try each problem independently before asking AI. When stuck, request a hint rather than a complete solution.':label==='Independent'?'You are practicing without AI in this session. Keep checking your understanding and ask for explanations when genuinely needed.':'You are combining independent attempts with AI support. Keep AI in a supporting role and verify its explanations.'}
+function badge(label){let c=label==='Overdependent'?'red':label==='Independent'?'green':'amber';return `<span class="pill ${c}">${label}</span>`}
+document.getElementById('assessmentForm').addEventListener('submit',async e=>{e.preventDefault();const total=Number(document.getElementById('total').value),attempted=Number(document.getElementById('attempted').value),aiUses=Number(document.getElementById('aiUses').value),subject=document.getElementById('subject').value.trim();const err=document.getElementById('formError');err.textContent='';if(!Number.isInteger(total)||!Number.isInteger(attempted)||!Number.isInteger(aiUses)||total<1||total>500||attempted<0||attempted>total||aiUses<0||aiUses>500){err.textContent='Please enter whole numbers. Total problems must be 1–500, attempts must be between 0 and the total, and AI uses must be 0–500.';return}const submit=e.submitter;submit.disabled=true;submit.textContent='Evaluating…';try{const response=await fetch('https://YOUR-RENDER-SERVICE.onrender.com/api/assess',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({attempted,aiUses,total})});const data=await response.json();if(!response.ok)throw new Error(data.error||'The assessment could not be processed.');const item={id:Date.now(),date:new Date().toISOString(),total,attempted,aiUses,subject,label:data.classification,recommendation:data.recommendation,engine:data.engine};assessments.unshift(item);save();const box=document.getElementById('assessmentResult');box.classList.add('show');box.innerHTML=`${badge(item.label)}<h3>Your session: ${item.label}</h3><p>${escapeHtml(item.recommendation)}</p><p class="muted">${attempted} of ${total} problems attempted independently · ${aiUses} AI uses · Classification by ${escapeHtml(data.engine)}</p><button class="secondary" onclick="showView('history')">View progress</button>`;renderDashboard()}catch(error){err.textContent=error.message.includes('Failed to fetch')?'Cannot reach the C++ backend. Start the StudyWise server and open the site at http://localhost:8080.':error.message;}finally{submit.disabled=false;submit.textContent='Evaluate my session'}});
+function renderDashboard(){document.getElementById('statCount').textContent=assessments.length;const sumA=assessments.reduce((s,x)=>s+x.attempted,0),sumT=assessments.reduce((s,x)=>s+x.total,0),sumAI=assessments.reduce((s,x)=>s+x.aiUses,0);document.getElementById('statAttempts').textContent=sumT?Math.round(sumA/sumT*100)+'%':'—';document.getElementById('statAI').textContent=sumT?(sumAI/sumT).toFixed(2):'—';const latest=assessments[0];document.getElementById('statResult').textContent=latest?latest.label:'Not assessed';const snap=document.getElementById('snapshot');if(!latest){snap.innerHTML='<div class="empty">Complete your first assessment to see your learning snapshot.</div>';return}snap.innerHTML=`<div style="margin-bottom:15px">${badge(latest.label)} <span class="muted" style="font-size:12px">${new Date(latest.date).toLocaleDateString()}</span></div><div class="barrow"><span>Independent attempts</span><div class="track"><div class="fill" style="width:${latest.attempted/latest.total*100}%"></div></div><strong>${Math.round(latest.attempted/latest.total*100)}%</strong></div><div class="barrow"><span>AI uses / problems</span><div class="track"><div class="fill" style="width:${Math.min(100,latest.aiUses/latest.total*100)}%;background:#8a75df"></div></div><strong>${latest.aiUses}</strong></div><p class="muted">${latest.recommendation}</p>`}
+function renderHistory(){const el=document.getElementById('historyContent');if(!assessments.length){el.innerHTML='<div class="empty">No assessments yet. Record a session to start tracking your progress.</div>';return}el.innerHTML=`<div style="overflow:auto"><table class="history-table"><thead><tr><th>Date</th><th>Subject</th><th>Attempted</th><th>AI uses</th><th>Result</th></tr></thead><tbody>${assessments.map(x=>`<tr><td>${new Date(x.date).toLocaleDateString()}</td><td>${escapeHtml(x.subject||'—')}</td><td>${x.attempted}/${x.total}</td><td>${x.aiUses}</td><td>${badge(x.label)}</td></tr>`).join('')}</tbody></table></div><div style="margin-top:15px"><button class="secondary" onclick="exportData()">Export history (CSV)</button> <button class="ghost" onclick="clearHistory()">Clear local history</button></div>`}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function exportData(){const rows=[['date','subject','attempted','ai_uses','total','classification'],...assessments.map(x=>[x.date,x.subject,x.attempted,x.aiUses,x.total,x.label])];const csv=rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='studywise-history.csv';a.click();URL.revokeObjectURL(a.href)}
+function clearHistory(){if(confirm('Delete all assessment history stored in this browser?')){assessments=[];save();renderHistory();renderDashboard()}}
+const defaultTasks=['Choose one problem to attempt without AI','Write down your first approach before asking for help','If stuck, ask AI for one hint—not the full answer','Explain the final solution in your own words','Review one mistake and try a similar problem'];
+let tasks=defaultTasks.map((t,i)=>({text:t,done:false,id:i}));
+function renderPlan(){document.getElementById('planList').innerHTML=tasks.map((t,i)=>`<label class="plan-item ${t.done?'done':''}"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask(${i},this.checked)"><span>${t.text}</span></label>`).join('')}
+function toggleTask(i,v){tasks[i].done=v;renderPlan()}
+function buildPlan(){const goal=document.getElementById('goal').value.trim(),days=Number(document.getElementById('days').value);if(!goal||!Number.isInteger(days)||days<1||days>30){alert('Enter a goal and a plan length between 1 and 30 days.');return}tasks=[{text:`Work toward your goal: ${goal}`,done:false},{text:'Attempt at least one task independently each day',done:false},{text:'Use AI for hints and explanations when needed',done:false},{text:'Write a short reflection on what you learned',done:false},{text:`Review your progress after ${days} days`,done:false}];renderPlan()}
+renderPlan();
+document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('chatInput'),q=input.value.trim();if(!q)return;const area=document.getElementById('chatMessages');area.insertAdjacentHTML('beforeend',`<div class="recommend"><strong>You:</strong> ${escapeHtml(q)}</div>`);const latest=assessments[0];let response;if(/copy|answer|solution/i.test(q))response='Try asking AI to explain the first step, identify a concept you may be missing, or give you a hint. Then close the response and complete the solution yourself.';else if(/stuck|hint|help/i.test(q))response='Describe what you have tried and where you got stuck. Ask for one hint at a time, then attempt the next step before requesting more help.';else if(/plan|practice|improve/i.test(q))response='Choose a small daily goal: attempt one or two problems independently, record where you got stuck, and use AI only to clarify those specific points.';else response=latest?`Your latest session was classified as ${latest.label}. ${latest.recommendation} A useful next step is to attempt one additional problem independently in your next session.`:'Start by trying a problem independently, then use AI to explain a concept or hint if you get stuck. Record a session in New assessment to receive feedback based on your activity.';area.insertAdjacentHTML('beforeend',`<div class="recommend"><strong>StudyWise:</strong> ${response}</div>`);input.value='';area.scrollTop=area.scrollHeight});
+renderDashboard();
+</script>
+</body>
+</html>

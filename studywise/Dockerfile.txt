@@ -1,0 +1,15 @@
+FROM debian:bookworm-slim
+
+WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y g++ racket ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+COPY . .
+
+RUN g++ -std=c++17 -O2 backend/server.cpp -o studywise-server
+
+EXPOSE 10000
+
+CMD ["./studywise-server"]
