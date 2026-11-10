@@ -154,7 +154,7 @@ const API_BASE_URL =
     window.location.hostname === 'localhost' ||
     window.location.hostname === '127.0.0.1'
         ? 'http://localhost:8080'
-        : 'https://study-wise-dtgz.onrender.com/';
+        : 'https://study-wise-dtgz.onrender.com';
 const titles={dashboard:['Dashboard','Build stronger independent-learning habits, one session at a time.'],assessment:['New assessment','Reflect on how you approached your recent study session.'],history:['My progress','Review your recorded sessions and learning patterns.'],plan:['Study plan','Turn your learning goals into small, practical actions.'],assistant:['Learning assistant','Get practical guidance for responsible AI use.']};
 let assessments=load();
 function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
