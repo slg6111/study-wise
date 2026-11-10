@@ -10,6 +10,4 @@ COPY . .
 
 RUN g++ -std=c++17 -O2 backend/server.cpp -o studywise-server
 
-EXPOSE 10000
-
 CMD ["./studywise-server"]
